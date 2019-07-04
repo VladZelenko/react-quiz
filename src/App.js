@@ -1,12 +1,11 @@
-import React from 'react';
-import Layout from './hoc/Layout/Layout'
+import React from "react";
+import Layout from "./hoc/Layout/Layout";
+import Quiz from "./containers/Quiz/Quiz";
 
 function App() {
   return (
     <Layout>
-      <div style={{width: 400, border: '1px solid black'}}>
-        <h1>Hello</h1>
-      </div>
+      <Quiz />
     </Layout>
   );
 }
