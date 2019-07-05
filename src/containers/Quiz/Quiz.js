@@ -19,13 +19,13 @@ class Quiz extends Component {
       },
       {
         question: "Какого цвета Солнце?",
-        rightAnswerId: 2,
+        rightAnswerId: 4,
         id: 2,
         answers: [
           { text: "Красное", id: 1 },
           { text: "Синее", id: 2 },
           { text: "Белое", id: 3 },
-          { text: "Зеленое", id: 4 }
+          { text: "Желтое", id: 4 }
         ]
       },
       {
@@ -37,7 +37,7 @@ class Quiz extends Component {
   };
 
   onAnswerClickHendler = answerId => {
-    if (answerId === 2) {
+    if (answerId === this.state.quiz[this.state.activeQuestion].rightAnswerId) {
       console.log("Правильный ответ");
       this.setState({ activeQuestion: this.state.activeQuestion + 1 });
     } else {
