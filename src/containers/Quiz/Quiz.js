@@ -27,6 +27,10 @@ class Quiz extends Component {
           { text: "Белое", id: 3 },
           { text: "Зеленое", id: 4 }
         ]
+      },
+      {
+        question: "Конец опроса",
+        answers: []
       }
     ],
     title: "Ответьте на все вопросы."
