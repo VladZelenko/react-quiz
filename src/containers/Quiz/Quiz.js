@@ -5,7 +5,8 @@ import FinishedQuiz from "../../component/FinishedQuiz/FinishedQuiz";
 
 class Quiz extends Component {
   state = {
-    isFinished: true,
+    results: {},
+    isFinished: false,
     activeQuestion: 0,
     answerState: null,
     quiz: [
@@ -35,6 +36,8 @@ class Quiz extends Component {
     title: "Ответьте на все вопросы."
   };
 
+  restartQuestions() {}
+
   onAnswerClickHendler = answerId => {
     if (this.state.answerState) {
       const key = Object.keys(this.state.answerState)[0];
@@ -44,10 +47,15 @@ class Quiz extends Component {
     }
 
     const question = this.state.quiz[this.state.activeQuestion];
+    const results = this.state.results;
 
     if (answerId === question.rightAnswerId) {
+      if (!results[answerId]) {
+        results[answerId] = "success";
+      }
       this.setState({
-        answerState: { [answerId]: "success" }
+        answerState: { [answerId]: "success" },
+        results: results
       });
 
       const timeOut = window.setTimeout(() => {
@@ -67,8 +75,11 @@ class Quiz extends Component {
       console.log("Правильный ответ");
     } else {
       console.log("Подумай еще");
+
+      results[answerId] = "error";
       this.setState({
-        answerState: { [answerId]: "error" }
+        answerState: { [answerId]: "error" },
+        results: results
       });
     }
   };
@@ -82,7 +93,11 @@ class Quiz extends Component {
       <div className={classes.Quiz}>
         <div className={classes.wrapper}>
           {this.state.isFinished ? (
-            <FinishedQuiz />
+            <FinishedQuiz
+              restart={this.restartQuestions}
+              results={this.state.results}
+              quiz={this.state.quiz}
+            />
           ) : (
             <div>
               <h1>{this.state.title}</h1>

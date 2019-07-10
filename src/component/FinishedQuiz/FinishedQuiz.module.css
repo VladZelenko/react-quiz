@@ -14,9 +14,9 @@
 }
 
 .success {
-  background: forestgreen;
+  color: forestgreen;
 }
 
 .error {
-  background: red;
+  color: red;
 }
