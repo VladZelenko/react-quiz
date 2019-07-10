@@ -2,6 +2,12 @@ import React from "react";
 import classes from "./FinishedQuiz.module.css";
 
 const FinishedQuiz = props => {
+  const successCount = Object.keys(props.results).reduce((total, key) => {
+    if (props.results[key] === "success") {
+      total++;
+    }
+    return total;
+  }, 0);
   return (
     <div className={classes.FinishedQuiz}>
       <h1>Finished</h1>
@@ -21,7 +27,9 @@ const FinishedQuiz = props => {
           );
         })}
       </ul>
-      <p>Правильно 4 из {props.quiz.length}</p>
+      <p>
+        Правильно {successCount} из {props.quiz.length}
+      </p>
       <button onClick={props.restart}>Повторить</button>
     </div>
   );

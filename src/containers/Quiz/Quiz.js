@@ -36,7 +36,14 @@ class Quiz extends Component {
     title: "Ответьте на все вопросы."
   };
 
-  restartQuestions() {}
+  restartQuestions = () => {
+    this.setState({
+      activeQuestion: 0,
+      answerState: null,
+      isFinished: false,
+      results: {}
+    });
+  };
 
   onAnswerClickHendler = answerId => {
     if (this.state.answerState) {
@@ -50,8 +57,8 @@ class Quiz extends Component {
     const results = this.state.results;
 
     if (answerId === question.rightAnswerId) {
-      if (!results[answerId]) {
-        results[answerId] = "success";
+      if (!results[question.id]) {
+        results[question.id] = "success";
       }
       this.setState({
         answerState: { [answerId]: "success" },
@@ -76,7 +83,7 @@ class Quiz extends Component {
     } else {
       console.log("Подумай еще");
 
-      results[answerId] = "error";
+      results[question.id] = "error";
       this.setState({
         answerState: { [answerId]: "error" },
         results: results
